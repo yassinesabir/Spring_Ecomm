@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="webjars/bootstrap/5.3.3/js/bootstrap.min.js" rel="script"></script>
+</head>
+<body>
+  <!-- Navbar-->
+  <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="#">Ecomm-App</a>
+          <button
+                  data-mdb-collapse-init
+                  class="navbar-toggler"
+                  type="button"
+                  data-mdb-target="#navbarNav"
+                  aria-controls="navbarNav"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+          >
+              <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                  <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Features</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#"
+                         data-bs-toggle="modal" data-bs-target="#addNewProduct">Add new product</a>
+                  </li>
+
+              </ul>
+          </div>
+      </div>
+  </nav>
+  <!-- Varible Section-->
+    <section layout:fragment="content"></section>
+  <!-- Footer-->
+  <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+      <div class="col mb-3">
+          <a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
+              <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+          </a>
+          <p class="text-body-secondary">&copy; 2024</p>
+      </div>
+  </footer>
+
+
+    <!--Modal-->
+  <div class="modal" tabindex="-1" id="addNewProduct" aria-labelledby="addNewProduct" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title">New Product</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                 <form method="post" th:action="@{addProduct}" th:object="${product}">
+                     <div class="mb-3 row">
+                         <label for="name" class="col-sm-2 col-form-label">Product Name</label>
+                         <div class="col-sm-10">
+                             <input type="text" class="form-control" id="name" name="name" th:field="*{name}">
+                             <span th:errors="${product.name}"></span>
+                         </div>
+                     </div>
+                     <div class="mb-3 row">
+                         <label for="ref" class="col-sm-2 col-form-label">Product Ref</label>
+                         <div class="col-sm-10">
+                             <input type="text" class="form-control" id="ref" name="ref" th:field="*{ref}">
+                             <span th:errors="${product.ref}"></span>
+                         </div>
+                     </div>
+                     <div class="mb-3 row">
+                         <label for="code" class="col-sm-2 col-form-label">Product Code</label>
+                         <div class="col-sm-10">
+                             <input type="number" class="form-control" id="code" name="code" th:field="*{code}">
+                             <span th:errors="${product.code}"></span>
+                         </div>
+                     </div>
+                     <div class="mb-3 row">
+                         <label for="date" class="col-sm-2 col-form-label">Production Date</label>
+                         <div class="col-sm-10">
+                             <input type="date" class="form-control" id="date" name="prodDate" th:field="*{prodDate}">
+                             <span th:errors="${product.prodDate}"></span>
+                         </div>
+                     </div>
+                     <div class="mb-3 row">
+                         <label for="price" class="col-sm-2 col-form-label">Product Price</label>
+                         <div class="col-sm-10">
+                             <input type="number" class="form-control" id="price" name="price" th:field="*{price}">
+                             <span th:errors="${product.price}"></span>
+                         </div>
+                     </div>
+                 </form>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" onclick="return confirm('Do you want to add this product?')">Save changes</button>
+              </div>
+          </div>
+      </div>
+  </div>
+</body>
+</html>
+
+

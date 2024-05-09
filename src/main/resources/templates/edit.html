@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Page</title>
+</head>
+<body>
+<div class="modal" tabindex="-1" id="EditProduct" aria-labelledby="addEditProdct" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Price</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" th:action="@{edit}">
+                    <div class="mb-3 row">
+                        <label for="price" class="col-sm-2 col-form-label">Product Price</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="price" name="price" th:value="@{product.price}">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="return confirm('Do you want to add this product?')">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

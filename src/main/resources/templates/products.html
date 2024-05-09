@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="layout">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+    href="webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title th:text="${title}"></title>
+</head>
+<body>
+    <div class="container" layout:fragment="content">
+        <div class="mx-3 my-5">
+            <div class="row">
+                <div class="col-6">
+                    <div class="alert alert-success" role="alert">
+                        <h1 th:text="${title}"></h1>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="alert alert-info" role="alert">
+                        <h2>Nombre total des produits:
+                            <span th:text="${count}"></span> </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form method="get" th:action="@{index}" class="mb-5">
+            <input type="text" placeholder="Entrer le nom du produit" name="NomProduit">
+            <button type="submit" class="btn btn-primary">Chercher</button>
+        </form>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-striped">
+                    <thead>
+                        <th>Name</th>
+                        <th>Reference</th>
+                        <th>Price</th>
+                        <th>Edition</th>
+                        <th>Delete</th>
+                    </thead>
+                    <tbody>
+                    <tr th:each="produit:${prdcts}">
+                        <td th:text="${produit.name}"></td>
+                        <td th:text="${produit.ref}"></td>
+                        <td th:text="${produit.price}"></td>
+                        <td>
+                            <a class="btn btn-warning">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger"
+                                th:href="@{delete(id=${produit.id})}"
+                                onclick="return confirm('Do you want to delete this product?')">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <nav aria-label="pagination">
+                    <ul class="pagination pagination-md">
+                        <li th:each="p:${listPages}"
+                            th:class=
+                                    "${currentPage == p ?'page-item active':'page-item' }">
+                            <a class="page-link" th:text="${p+1}"
+                            th:href="@{index(page=${p})}"></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
